@@ -1,7 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
 import smtplib
-from email.message import EmailMessage
 import time
 
 email_id = 'abc.20.23.mp@gmail.com'
@@ -10,7 +9,6 @@ email_pass = 'csxrjumclmzfpfmb'
 def check_price ():
     URL = "https://www.amazon.in/Apple-iPhone-14-128GB-Blue/dp/B0BDK62PDX/ref=sr_1_5?crid=215WNQTTSDE8&keywords=iphone%2B14&qid=1681734368&sprefix=iphone%2Caps%2C204&sr=8-5&th=1"
     headers = {"user-Agents" : 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.4 Safari/605.1.15'  }
-
 
     page = requests.get(URL , headers = headers)
     soup = BeautifulSoup(page.content , 'html.parser')
@@ -24,15 +22,12 @@ def check_price ():
     print(title.strip())
     print(converted_price) 
     
-
     if(converted_price <= 71999):
         send_email()
     else:
         print("Price is not dropped")
         print("No email sent")
-
         
- 
 def send_email():
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.ehlo()  # stablishing connection with the server and the gmail
@@ -50,26 +45,9 @@ def send_email():
         
         print('HEY EMAIL HAS BEEN SENT!')
         server.quit()  # quit the server
-    
 
-# while True:
 check_price()
 time.sleep(2)
     
 
-# def send_mail():
-#     msg = EmailMessage()
-#     msg['Subject'] = 'Product price fell down'
-#     msg='Hey buddy Check this amazon link : https://www.amazon.in/Apple-iPhone-14-128GB-Blue/dp/B0BDK62PDX/ref=sr_1_5?crid=215WNQTTSDE8&keywords=iphone%2B14&qid=1681734368&sprefix=iphone%2Caps%2C204&sr=8-5&th=1'
-#     msg['From'] = email_id
-#     msg['To'] = "kumbhareanurag1023@gmail.com"
-
-    
-#     with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
-#         smtp.login(email_id, email_pass)
-#         smtp.send_message(msg)
-        
-# while True:
-#     check_price ()
-#     time.sleep(10)
 
